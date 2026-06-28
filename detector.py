@@ -13,7 +13,7 @@ class Detection:
     technique: str
     description:str
 
-def detect_brute_force(entries: list[LogEntry], threshold: int = 10) -> list[Detection]:
+def detect_brute_force(entries: list[LogEntry], threshold: int = 10) -> list[Detection]: #threshold is 10 it's a default, not a tuned value — real tuning would come from analyzing actual traffic for that specific system."
     failure_counter = Counter(
         e.ip for e in entries if e.status in AUTH_FAILURE_CODES
     )
