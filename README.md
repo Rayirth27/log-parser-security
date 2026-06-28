@@ -43,7 +43,6 @@ log-parser-security/
 ├── parser.py        # Parses raw log lines into LogEntry objects
 ├── detector.py       # Counts auth failures per IP, flags brute-force candidates
 ├── report.py         # Formats results into a structured report
-├── collect_IPs.py    # TODO: describe what this script does
 └── tests/
     └── test_parser.py
 ```
