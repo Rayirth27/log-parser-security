@@ -4,4 +4,8 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+.env
 apache_logs.txt
+fake.log
+file.txt
+report.txt
