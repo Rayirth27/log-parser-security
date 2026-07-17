@@ -1,4 +1,5 @@
 from collections import Counter
+import json
 from parser import LogEntry
 from detector import Detection
 
@@ -33,3 +34,36 @@ def generate_report(entries, detections, threshold) -> str:
             ]
     lines.append("=" * 60)
     return "\n".join(lines)
+
+
+def generate_json_report(entries, detections, threshold) -> dict:
+    if not entries:
+        return {"error": "No log entries to analyse."}
+
+    total        = len(entries)
+    ip_counts    = Counter(e.ip for e in entries)
+    unique_ips   = len(ip_counts)
+    status_count = Counter(e.status for e in entries)
+    top_5        = ip_counts.most_common(5)
+    flagged_ips  = {d.ip for d in detections}
+
+    return {
+        "total_events": total,
+        "unique_ips": unique_ips,
+        "threshold": threshold,
+        "flagged_count": len(detections),
+        "status_code_breakdown": dict(status_count),
+        "top_ips": [
+            {"ip": ip, "requests": count, "flagged": ip in flagged_ips}
+            for ip, count in top_5
+        ],
+        "detections": [
+            {
+                "ip": d.ip,
+                "failure_count": d.failure_count,
+                "technique": d.technique,
+                "description": d.description,
+            }
+            for d in detections
+        ],
+    }
