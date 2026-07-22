@@ -102,8 +102,6 @@ log-parser-security/
 ├── detector.py       # Counts auth failures per IP, flags brute-force candidates
 ├── report.py          # Formats results into a text or JSON report
 ├── ai_analyzer.py     # Optional LLM-powered threat analysis (via OpenRouter)
-├── collect_IPs.py     # TODO: describe what this script does
-├── requirements.txt
 ├── .env               # OpenRouter API key (git-ignored, not committed)
 └── tests/
     └── test_parser.py
