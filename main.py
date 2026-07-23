@@ -1,7 +1,7 @@
 import argparse
 import sys
 import json
-from parser import parse_file
+from log_parser import parse_file
 from detector import detect_brute_force
 from report import generate_report, generate_json_report
 from ai_analyzer import analyse_threat

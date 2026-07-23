@@ -1,5 +1,5 @@
 import pytest
-from parser import parse_line, parse_file
+from log_parser import parse_line, parse_file
 
 SAMPLE = '83.149.9.216 - - [17/May/2015:10:05:03 +0000] "GET /login HTTP/1.1" 401 1234'
 

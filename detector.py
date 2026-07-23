@@ -1,6 +1,6 @@
 from collections import Counter
 from dataclasses import dataclass
-from parser import LogEntry
+from log_parser import LogEntry
 
 # Repeated auth failures from a single IP = priamry indicator of T1110.001
 AUTH_FAILURE_CODES = {"401", "403"}
