@@ -1,5 +1,7 @@
 # Log Parser & Brute-Force Detector
 
+[![CI](https://github.com/Rayirth27/log-parser-security/actions/workflows/ci.yml/badge.svg)](https://github.com/Rayirth27/log-parser-security/actions/workflows/ci.yml)
+
 A command-line security tool that parses Apache access logs, detects brute-force login activity, and now includes an optional AI-powered threat analysis layer. Flagged IPs are mapped to MITRE ATT&CK **T1110.001 (Password Guessing)**.
 
 ## What it does
@@ -102,6 +104,7 @@ log-parser-security/
 ├── detector.py       # Counts auth failures per IP, flags brute-force candidates
 ├── report.py          # Formats results into a text or JSON report
 ├── ai_analyzer.py     # Optional LLM-powered threat analysis (via OpenRouter)
+├── requirements.txt    
 ├── .env               # OpenRouter API key (git-ignored, not committed)
 └── tests/
     └── test_parser.py
