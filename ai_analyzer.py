@@ -3,7 +3,9 @@
 # Sends it to an LLM via OpenRouter
 # Returns structured threat analysis in JSON
 
-import os, json, time
+import os
+import json
+import time
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -22,7 +24,7 @@ client = OpenAI(
     api_key=api_key,
 )
 
-import time
+
 
 def analyse_threat(log_summary: str, max_retries: int = 3) -> dict:
     for attempt in range(max_retries):
@@ -30,9 +32,10 @@ def analyse_threat(log_summary: str, max_retries: int = 3) -> dict:
             response = client.chat.completions.create(
                 model="google/gemma-4-26b-a4b-it:free",
                 max_tokens=1024,
-                messages=[{
-                    "role": "user",
-                    "content": f"""Analyse this security log summary and return JSON with:
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"""Analyse this security log summary and return JSON with:
                     - threat_level (LOW/MEDIUM/HIGH/CRITICAL)
                     - attack_type
                     - recommended_action
@@ -40,13 +43,14 @@ def analyse_threat(log_summary: str, max_retries: int = 3) -> dict:
 
                     Log summary: {log_summary}
 
-                    Return only valid JSON, no markdown fences, no explanation."""
-                }]
+                    Return only valid JSON, no markdown fences, no explanation.""",
+                    }
+                ],
             )
             break
         except Exception as e:
             if "429" in str(e) and attempt < max_retries - 1:
-                wait = 2 ** attempt  # 1s, 2s, 4s
+                wait = 2**attempt  # 1s, 2s, 4s
                 print(f"[!] Rate limited, retrying in {wait}s...")
                 time.sleep(wait)
                 continue
